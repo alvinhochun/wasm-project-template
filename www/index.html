@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="module">
+        import { add, default as init } from './wasm_module.js';
+
+        async function run() {
+            await init('./wasm_module_bg.wasm');
+
+            // Now the imported functions can be used:
+            console.log(add(1, 2));
+
+            // This makes the functions available to the window context:
+            window.add = add;
+        }
+
+        run();
+    </script>
+</head>
+
+<body>
+    <form onSubmit="return false">
+        Enter X: <input type="number" name="X" required><br>
+        Enter Y: <input type="number" name="Y" required><br><br>
+        <input type="submit" value="X+Y=" onClick="result.innerText = add(parseFloat(X.value),parseFloat(Y.value))">
+        <label id="result"></label>
+    </form>
+</body>
+<html>
