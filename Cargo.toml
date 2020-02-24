@@ -4,3 +4,6 @@ members = [
     "dev-server",
     "xtask",
 ]
+
+[patch.crates-io]
+stdweb = { git = "https://github.com/alvinhochun/stdweb.git", branch = "fix-undeclared-wasm-bindgen" }

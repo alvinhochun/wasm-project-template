@@ -12,6 +12,8 @@ crate-type = ["cdylib"]
 default = ["console_error_panic_hook"]
 
 [dependencies]
+kiss3d = "0.22"
+nalgebra = "0.19.0"
 wasm-bindgen = "0.2"
 
 console_error_panic_hook = { version = "0.1", optional = true }
