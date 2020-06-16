@@ -18,6 +18,7 @@ fn try_main() -> Result<(), DynError> {
     match task.as_ref().map(|it| it.as_str()) {
         Some("build-dev") => build_dev()?,
         Some("run-dev") => run_dev()?,
+        Some("build-rel") => build_rel()?,
         _ => print_help(),
     }
     Ok(())
@@ -29,6 +30,7 @@ fn print_help() {
 Tasks:
 build-dev       Build dev files
 run-dev         Run dev server
+build-rel       Build release files
 "
     )
 }
@@ -64,6 +66,26 @@ fn run_dev() -> Result<(), DynError> {
         .status()?;
     if !status.success() {
         Err("cargo run failed!")?;
+    }
+    Ok(())
+}
+
+fn build_rel() -> Result<(), DynError> {
+    println!("Running wasm-pack...");
+    let status = Command::new("wasm-pack")
+        .current_dir(project_root())
+        .args(&[
+            "build",
+            "wasm-module/",
+            "--release",
+            "--out-dir",
+            "../target/wasm-dist-rel",
+            "--target",
+            "web",
+        ])
+        .status()?;
+    if !status.success() {
+        Err("wasm-pack failed!")?;
     }
     Ok(())
 }
