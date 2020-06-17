@@ -4,3 +4,8 @@ members = [
     "dev-server",
     "xtask",
 ]
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+opt-level = 's'

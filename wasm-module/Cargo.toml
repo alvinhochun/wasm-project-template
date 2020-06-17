@@ -12,11 +12,8 @@ crate-type = ["cdylib"]
 default = ["console_error_panic_hook"]
 
 [dependencies]
-rhai = { version = "0.15", features = [ "only_i64" ] }
+rhai = { version = "0.15", features = [ "only_i64", "no_module", "no_optimize", "unchecked" ] }
 wasm-bindgen = "0.2"
 js-sys = "*"
 
 console_error_panic_hook = { version = "0.1", optional = true }
-
-[profile.release]
-opt-level = 's'
