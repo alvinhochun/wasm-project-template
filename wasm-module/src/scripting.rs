@@ -1,4 +1,4 @@
-use rhai::packages::{ArithmeticPackage, EvalPackage, LogicPackage, Package};
+use rhai::packages::{EvalPackage, Package};
 
 pub fn run_script(
     script: &str,
@@ -7,8 +7,6 @@ pub fn run_script(
 ) -> Result<String, String> {
     let engine = {
         let mut engine = rhai::Engine::new();
-        engine.load_package(ArithmeticPackage::new().get());
-        engine.load_package(LogicPackage::new().get());
         engine.load_package(EvalPackage::new().get());
         engine.on_print(move |s| print_callback(s));
         engine.on_debug(move |s| debug_callback(s));
